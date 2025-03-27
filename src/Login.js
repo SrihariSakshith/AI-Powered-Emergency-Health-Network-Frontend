@@ -23,7 +23,7 @@ const Login = ({ onLoginSuccess }) => {
     try {
       const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app";
 
-      const response = await fetch(`${apiUrl}/login/login`, {
+      const response = await fetch(`${apiUrl}/login`, {  // Fixed API route
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,6 +35,8 @@ const Login = ({ onLoginSuccess }) => {
       if (!response.ok) {
         if (response.status === 401) {
           throw new Error("Unauthorized: Invalid username or password.");
+        } else if (response.status === 404) {
+          throw new Error("Login route not found. Please check the server.");
         }
         throw new Error(`Failed to login. Status: ${response.status}`);
       }
