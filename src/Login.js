@@ -56,7 +56,11 @@ const Login = ({ onLoginSuccess }) => {
       }
     } catch (error) {
       console.error("Error during login:", error);
-      setErrorMessage(error.message || "An error occurred. Please try again later.");
+      if (error.message.includes("Failed to fetch")) {
+        setErrorMessage("Network error: Unable to reach the server. Please check your connection.");
+      } else {
+        setErrorMessage(error.message || "An error occurred. Please try again later.");
+      }
     }
   };
 
