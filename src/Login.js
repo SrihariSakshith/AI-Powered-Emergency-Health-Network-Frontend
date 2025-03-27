@@ -23,7 +23,7 @@ const Login = ({ onLoginSuccess }) => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001'}/login/login`, // Use localhost for API calls
+        `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app/'}/login/login`, // Use localhost for API calls
         {
           method: 'POST',
           headers: {
