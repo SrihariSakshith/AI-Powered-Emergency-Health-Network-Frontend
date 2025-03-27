@@ -1,68 +1,56 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./css/login.css"; // Import login CSS
+import "./css/login.css";
 
 const Login = ({ onLoginSuccess }) => {
   const [role, setRole] = useState("patient");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [message, setMessage] = useState({ type: "", text: "" });
 
   const navigate = useNavigate();
 
   const login = async () => {
-    setErrorMessage("");
-    setSuccessMessage("");
+    setMessage({ type: "", text: "" });
 
     if (!username || !password) {
-      setErrorMessage("Username and Password are required!");
+      setMessage({ type: "error", text: "Username and Password are required!" });
       return;
     }
 
     try {
       const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app";
 
-      const response = await fetch(`${apiUrl}/login`, {  // Fixed API route
+      const response = await fetch(`${apiUrl}/login/login`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // Important for CORS with credentials
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ username, password, role }),
       });
 
-      if (!response.ok) {
-        if (response.status === 401) {
-          throw new Error("Unauthorized: Invalid username or password.");
-        } else if (response.status === 404) {
-          throw new Error("Login route not found. Please check the server.");
-        }
-        throw new Error(`Failed to login. Status: ${response.status}`);
-      }
-
       const data = await response.json();
 
-      if (data.success) {
-        setSuccessMessage(data.message);
+      if (response.ok && data.success) {
         localStorage.setItem("username", username);
         localStorage.setItem("role", role);
+        setMessage({ type: "success", text: data.message });
 
         if (onLoginSuccess) {
           onLoginSuccess(username, role);
         }
 
-        navigate("/");
+        setTimeout(() => navigate("/"), 1000); // Redirect after success message
       } else {
-        setErrorMessage(data.message);
+        setMessage({ type: "error", text: data.message || "Login failed. Try again." });
       }
     } catch (error) {
-      console.error("Error during login:", error);
-      if (error.message.includes("Failed to fetch")) {
-        setErrorMessage("Network error: Unable to reach the server. Please check your connection.");
-      } else {
-        setErrorMessage(error.message || "An error occurred. Please try again later.");
-      }
+      console.error("Login Error:", error);
+      setMessage({
+        type: "error",
+        text: error.message.includes("Failed to fetch")
+          ? "Network error: Unable to reach the server."
+          : "An unexpected error occurred. Please try again later.",
+      });
     }
   };
 
@@ -91,8 +79,7 @@ const Login = ({ onLoginSuccess }) => {
 
         <button onClick={login}>Login / Sign up</button>
 
-        {errorMessage && <div className="error">{errorMessage}</div>}
-        {successMessage && <div className="success">{successMessage}</div>}
+        {message.text && <div className={message.type === "error" ? "error" : "success"}>{message.text}</div>}
       </div>
     </div>
   );
