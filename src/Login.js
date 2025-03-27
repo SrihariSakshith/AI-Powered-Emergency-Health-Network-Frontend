@@ -23,15 +23,16 @@ const Login = ({ onLoginSuccess }) => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app/'}/login/login`, // Use localhost for API calls
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, password, role }),
-        }
-      );
+  `${(process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app')}/login/login`, // ✅ Fixed URL
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username, password, role }),
+  }
+);
+
 
       if (!response.ok) {
         setErrorMessage('Failed to login. Please try again.');
