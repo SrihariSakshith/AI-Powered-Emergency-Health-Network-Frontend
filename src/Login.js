@@ -33,7 +33,10 @@ const Login = ({ onLoginSuccess }) => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to login. Please try again.");
+        if (response.status === 401) {
+          throw new Error("Unauthorized: Invalid username or password.");
+        }
+        throw new Error(`Failed to login. Status: ${response.status}`);
       }
 
       const data = await response.json();
@@ -53,7 +56,7 @@ const Login = ({ onLoginSuccess }) => {
       }
     } catch (error) {
       console.error("Error during login:", error);
-      setErrorMessage("An error occurred. Please try again later.");
+      setErrorMessage(error.message || "An error occurred. Please try again later.");
     }
   };
 
