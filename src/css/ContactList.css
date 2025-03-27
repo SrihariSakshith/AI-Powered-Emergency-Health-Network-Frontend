@@ -1,0 +1,61 @@
+/* ContactList.css */
+
+.contact-list-wrapper {
+  width: 100%;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.contact-list-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.loading-status {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #007BFF;
+}
+
+.error-status {
+  text-align: center;
+  font-size: 1.5rem;
+  color: red;
+}
+
+.no-queries-found {
+  text-align: center;
+  font-size: 1.25rem;
+  color: #888;
+}
+
+.query-list {
+  list-style: none;
+  padding: 0;
+}
+
+.query-item {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.query-username {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.query-description {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.query-time {
+  font-size: 0.875rem;
+  color: #555;
+}

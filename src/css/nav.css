@@ -1,0 +1,142 @@
+/* General reset for the navbar */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-header {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.nav-logo {
+  font-size: 2em;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+
+.nav-navbar {
+  display: flex;
+  align-items: center;
+}
+
+.nav-navbar-list {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav-navbar-link {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1em;
+  transition: color 0.3s ease;
+}
+
+.nav-navbar-link:hover {
+  color: #4CAF50; /* Green color for hover effect */
+}
+
+.nav-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+}
+
+.nav-username {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.nav-role {
+  font-style: italic;
+  margin-right: 20px;
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.nav-btn:hover {
+  background-color: #45a049;
+}
+
+.nav-btn:focus {
+  outline: none;
+}
+
+.nav-navbar-list li {
+  display: inline-block;
+}
+
+.navbar-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-navbar {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  .nav-navbar-list {
+    flex-direction: column;
+  }
+
+  .nav-navbar-link {
+    margin: 10px 0;
+  }
+
+  .nav-user-info {
+    margin-top: 20px;
+  }
+
+  .navbar-mobile {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 2em;
+  }
+}

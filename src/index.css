@@ -1,0 +1,172 @@
+/* General reset for better cross-browser consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Full-width and height settings for the entire page */
+  html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Body styling */
+  body {
+    font-family: Arial, sans-serif; /* Set a universal font-family */
+    color: #333; /* Neutral text color */
+    line-height: 1.5;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  
+  /* Header Section */
+  .header {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  /* Top Contact Info */
+  .header-top {
+    padding: 10px 0;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .contact-list, .social-list {
+    list-style: none;
+    display: inline-block; /* Adjust to inline-block instead of flex */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .contact-item,
+  .social-list li {
+    display: inline-block;
+    padding-right: 15px;
+  }
+  
+  .contact-link,
+  .social-link {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 14px;
+  }
+  
+  .contact-link:hover,
+  .social-link:hover {
+    color: #0056b3; /* Slightly darker blue on hover */
+  }
+  
+  /* Header Bottom Section */
+  .header-bottom {
+    width: 100%;
+    padding: 10px 20px;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1200px; /* Keeps the layout centered and spacious */
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0e254e;
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+  
+  /* Navbar */
+  .navbar {
+    width: 100%;
+  }
+  
+  .navbar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0 15px;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-link:hover {
+    color: #007BFF;
+  }
+  
+  .navbar-user {
+    text-align: right; /* Aligns user info to the right */
+  }
+  
+  .navbar-user .username {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .navbar-user .btn {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar-user .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .navbar-user .btn:focus {
+    outline: none;
+  }
+  
+  .navbar-user .btn:active {
+    background-color: #004085;
+  }
+  
+  /* Media Queries for Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .header-top {
+      text-align: center;
+    }
+  
+    .navbar-list {
+      text-align: center;
+    }
+  
+    .navbar-user {
+      margin-top: 15px;
+      text-align: center;
+    }
+  
+    .logo {
+      font-size: 26px;
+    }
+  
+    .navbar-link {
+      font-size: 18px;
+    }
+  
+    .contact-list,
+    .social-list {
+      justify-content: center;
+      gap: 15px;
+    }
+  }
+  

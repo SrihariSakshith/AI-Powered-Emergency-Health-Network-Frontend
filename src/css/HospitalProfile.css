@@ -1,0 +1,171 @@
+.hospital-form-container {
+  font-family: 'Lucida Sans', sans-serif;
+  max-width: 500px;
+  margin: 0 auto; /* Center the form on the page */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hospital-form-title {
+  text-align: center;
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.hospital-form-group {
+  margin-bottom: 15px;
+}
+
+.hospital-form-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.hospital-form-input,
+.hospital-form-textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.hospital-form-input:focus,
+.hospital-form-textarea:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+.hospital-form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.hospital-form-submit-btn,
+.hospital-form-donate-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.hospital-form-submit-btn:hover,
+.hospital-form-donate-btn:hover {
+  background-color: #45a049;
+}
+
+.hospital-form-donate-btn {
+  background-color: #ff5722;
+}
+
+.hospital-form-donate-btn:hover {
+  background-color: #e64a19;
+}
+
+/* Add responsive styling for small screens */
+@media (max-width: 768px) {
+  .hospital-form-container {
+    padding: 15px;
+  }
+
+  .hospital-form-submit-btn,
+  .hospital-form-donate-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+  }
+}
+
+.hospital-profile-container {
+  padding: 20px;
+  font-family: 'Lucida Sans', sans-serif;
+}
+
+.hospital-profile-title {
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+}
+
+.hospital-profile-details {
+  margin-bottom: 20px;
+}
+
+.hospital-profile-item {
+  margin: 10px 0;
+}
+
+.hospital-profile-form-group {
+  margin-bottom: 15px;
+}
+
+.hospital-profile-label {
+  display: block;
+  font-weight: bold;
+}
+
+.hospital-profile-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.hospital-profile-submit-button,
+.hospital-profile-donation-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.hospital-profile-submit-button:hover,
+.hospital-profile-donation-button:hover {
+  background-color: #45a049;
+}
+
+
+.hospital-profile-donation-button {
+  background-color: #f57c00; /* Vibrant orange color */
+  color: #fff; /* White text for contrast */
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.hospital-profile-donation-button:hover {
+  background-color: #e65100; /* Slightly darker orange for hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+.hospital-profile-donation-button:active {
+  background-color: #bf360c; /* Even darker orange for active state */
+  transform: translateY(0); /* Reset lift effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+}

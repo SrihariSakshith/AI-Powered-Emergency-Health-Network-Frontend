@@ -1,0 +1,36 @@
+/* src/css/HospitalDetails.css */
+.hospital-details-container {
+    padding: 20px;
+  }
+  
+  .hospital-details-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hospital-details-card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .hospital-details-card p {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .back-button {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: inline-block;
+  }
+  
+  .back-button:hover {
+    background-color: #0056b3;
+  }
+  

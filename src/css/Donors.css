@@ -1,0 +1,104 @@
+/* General container and elements */
+.donors-container {
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+}
+
+.heading {
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 8px;
+  font-size: 1rem;
+  width: 250px;  /* Centered input width */
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  max-width: 100%;
+}
+
+.donors-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.donor-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.donor-card:hover {
+  transform: translateY(-10px);
+}
+
+.donor-name {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.donor-donation {
+  color: #555;
+  margin-top: 5px;
+}
+
+.contact-btn {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  margin-top: 10px;
+}
+
+.contact-btn:hover {
+  background-color: #45a049;
+}
+
+.donor-email {
+  display: none;
+  margin-top: 10px;
+  color: #555;
+}
+
+.donor-card:hover .contact-btn {
+  opacity: 0;  /* Hide the button when hovering */
+}
+
+.donor-card:hover .donor-email {
+  display: block;  /* Show email when hovering */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .donors-list {
+    grid-template-columns: 1fr;  /* Stack donor cards vertically on small screens */
+  }
+}
