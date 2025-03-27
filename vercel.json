@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/manifest.json",
+      "source": "/(.*)", 
       "headers": [
         {
           "key": "Cache-Control",
@@ -12,6 +12,12 @@
           "value": "*"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)", 
+      "destination": "/index.html"
     }
   ]
 }
