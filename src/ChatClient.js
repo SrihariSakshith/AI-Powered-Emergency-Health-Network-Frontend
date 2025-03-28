@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Nav from "./Nav.js"; // Updated import path
 import Footer from "./Footer.js"; // Updated import path
+import axios from "axios"; // Import axios
 import "./css/Chat.css";
+
+axios.defaults.withCredentials = true; // Enable credentials for axios
 
 const ChatClient = ({ username, role, onLogout }) => {
   const [messages, setMessages] = useState([]);
@@ -14,20 +17,13 @@ const ChatClient = ({ username, role, onLogout }) => {
     setMessages((prev) => [...prev, userMessage]);
 
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000'}/chat/chatbot`,
-        { // Use environment variable or fallback to Vercel URL
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: input }),
-        }
-      );
+      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app";
 
-      if (!response.ok) {
-        throw new Error(`Server responded with status ${response.status}`);
-      }
+      const response = await axios.post(`${apiUrl}/chat/chatbot`, {
+        message: input,
+      });
 
-      const data = await response.json();
+      const data = response.data;
       const botMessage = { sender: "bot", text: data.response };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
