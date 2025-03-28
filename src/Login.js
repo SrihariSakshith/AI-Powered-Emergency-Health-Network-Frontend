@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import axios
+import axios from "axios"; 
 import "./css/login.css";
 
 axios.defaults.withCredentials = true; // Enable credentials for axios
@@ -54,6 +54,19 @@ const Login = ({ onLoginSuccess }) => {
     }
   };
 
+  // ✅ Test connection function to check frontend-backend communication
+  const testConnection = async () => {
+    try {
+      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app";
+      
+      const response = await axios.get(`${apiUrl}/test-connection`);
+      alert(response.data.message); // Show success message
+    } catch (error) {
+      alert("Failed to connect to backend!");
+      console.error("Connection Test Error:", error);
+    }
+  };
+
   return (
     <div className="login-wrapper">
       <div className="login-container">
@@ -78,6 +91,11 @@ const Login = ({ onLoginSuccess }) => {
         </div>
 
         <button onClick={login}>Login / Sign up</button>
+
+        {/* ✅ Test Connection Button */}
+        <button onClick={testConnection} style={{ marginTop: "10px", backgroundColor: "#28a745", color: "#fff" }}>
+          Test Connection
+        </button>
 
         {message.text && <div className={message.type === "error" ? "error" : "success"}>{message.text}</div>}
       </div>
