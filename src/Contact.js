@@ -15,7 +15,7 @@ const ContactForm = () => {
   
     try {
       const response = await axios.post(
-        "http://localhost:3000/contact/api/contact",
+        "https://ai-powered-emergency-health-network-server.vercel.app//contact/api/contact",
         queryData
       );
   

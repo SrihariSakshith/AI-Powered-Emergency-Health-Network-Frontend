@@ -11,7 +11,7 @@ const PatientProfile = ({ username }) => {
     useEffect(() => {
         const fetchPatientData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/patient-profile/api/patient/${username}`);
+                const response = await axios.get(`https://ai-powered-emergency-health-network-server.vercel.app//patient-profile/api/patient/${username}`);
                 const reportData = response.data?.report || {};
                 setFormData(reportData);
                 setDonation(response.data?.donation || ''); // Fetch donation separately
@@ -38,7 +38,7 @@ const PatientProfile = ({ username }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:3000/patient-profile/api/patient/${username}`, {
+            await axios.put(`https://ai-powered-emergency-health-network-server.vercel.app//patient-profile/api/patient/${username}`, {
                 report: formData,
                 donation,
             });
@@ -50,7 +50,7 @@ const PatientProfile = ({ username }) => {
 
     const handleRemoveDonation = async () => {
         try {
-            await axios.delete(`http://localhost:3000/patient-profile/api/patient/${username}/donation`);
+            await axios.delete(`https://ai-powered-emergency-health-network-server.vercel.app//patient-profile/api/patient/${username}/donation`);
             setHasDonated(false);
             setDonation('');
             alert('Donation status removed successfully!');

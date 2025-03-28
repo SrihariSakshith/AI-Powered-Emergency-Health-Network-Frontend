@@ -22,7 +22,7 @@ const Login = ({ onLoginSuccess }) => {
     }
 
     try {
-      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app";
+      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app/";
 
       const response = await axios.post(`${apiUrl}/login/login/login`, {
         username,
@@ -92,11 +92,7 @@ const Login = ({ onLoginSuccess }) => {
 
         <button onClick={login}>Login / Sign up</button>
 
-        {/* ✅ Test Connection Button */}
-        <button onClick={testConnection} style={{ marginTop: "10px", backgroundColor: "#28a745", color: "#fff" }}>
-          Test Connection
-        </button>
-
+        
         {message.text && <div className={message.type === "error" ? "error" : "success"}>{message.text}</div>}
       </div>
     </div>

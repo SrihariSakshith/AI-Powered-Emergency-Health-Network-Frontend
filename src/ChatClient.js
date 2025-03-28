@@ -17,19 +17,22 @@ const ChatClient = ({ username, role, onLogout }) => {
     setMessages((prev) => [...prev, userMessage]);
 
     try {
-      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app";
+      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app/chat";
 
       const response = await axios.post(`${apiUrl}/chat/chat`, {
         message: input,
       });
 
-      const data = response.data;
-      const botMessage = { sender: "bot", text: data.response };
+      console.log("Response from API:", response.data); // Debugging
+
+      const botMessage = { sender: "bot", text: response.data.reply }; // ✅ Corrected Property
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error("Error in chat API call:", error);
-      const errorMessage = { sender: "bot", text: "Error: Unable to fetch response." };
-      setMessages((prev) => [...prev, errorMessage]);
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: "Error: Unable to fetch response." },
+      ]);
     }
 
     setInput("");
