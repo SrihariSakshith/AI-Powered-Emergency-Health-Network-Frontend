@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios
 import "./css/login.css";
+
+axios.defaults.withCredentials = true; // Enable credentials for axios
 
 const Login = ({ onLoginSuccess }) => {
   const [role, setRole] = useState("patient");
@@ -21,16 +24,15 @@ const Login = ({ onLoginSuccess }) => {
     try {
       const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app";
 
-      const response = await fetch(`${apiUrl}/login/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ username, password, role }),
+      const response = await axios.post(`${apiUrl}/login/login`, {
+        username,
+        password,
+        role,
       });
 
-      const data = await response.json();
+      const data = response.data;
 
-      if (response.ok && data.success) {
+      if (response.status === 200 && data.success) {
         localStorage.setItem("username", username);
         localStorage.setItem("role", role);
         setMessage({ type: "success", text: data.message });
@@ -47,9 +49,7 @@ const Login = ({ onLoginSuccess }) => {
       console.error("Login Error:", error);
       setMessage({
         type: "error",
-        text: error.message.includes("Failed to fetch")
-          ? "Network error: Unable to reach the server."
-          : "An unexpected error occurred. Please try again later.",
+        text: error.response?.data?.message || "An unexpected error occurred. Please try again later.",
       });
     }
   };
