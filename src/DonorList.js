@@ -11,7 +11,7 @@ const DonorList = () => {
 
   useEffect(() => {
     axios
-      .get('https://ai-powered-emergency-health-network-server.vercel.app//donorslist/all') // Updated route
+      .get('https://ai-powered-emergency-health-network-server.vercel.app/donorslist/all') // Updated route
       .then((response) => {
         setDonors(response.data.data); // Ensure the response structure matches
         setLoading(false);
@@ -24,7 +24,7 @@ const DonorList = () => {
 
   const deleteDonor = async (username) => {
     try {
-      await axios.delete(`https://ai-powered-emergency-health-network-server.vercel.app//donorslist/${username}`); // Updated route
+      await axios.delete(`https://ai-powered-emergency-health-network-server.vercel.app/donorslist/${username}`); // Updated route
       setDonors(donors.filter((donor) => donor.username !== username));
     } catch (error) {
       console.error('Error deleting donor:', error);

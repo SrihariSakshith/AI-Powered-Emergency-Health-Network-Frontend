@@ -10,7 +10,7 @@ const ContactList = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await fetch('https://ai-powered-emergency-health-network-server.vercel.app//contact-list/api/contacts');
+        const response = await fetch('https://ai-powered-emergency-health-network-server.vercel.app/contact-list/api/contacts');
         if (!response.ok) {
           throw new Error('Failed to fetch contacts');
         }

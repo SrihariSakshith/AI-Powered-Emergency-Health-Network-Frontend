@@ -16,7 +16,7 @@ const Hospitals = ({ username, role }) => {
     const fetchHospitals = async () => {
       try {
         const hospitalsResponse = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app/'}/hospitals/all`
+          `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app'}/hospitals/all`
         );
         console.log("All Hospitals API Response:", hospitalsResponse.data); // Check the API response
 
@@ -29,7 +29,7 @@ const Hospitals = ({ username, role }) => {
         }
 
         const recommendedResponse = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app/'}/hospitals/recommended`,
+          `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app'}/hospitals/recommended`,
           {
             params: { role, username },
           }

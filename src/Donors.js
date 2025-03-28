@@ -20,7 +20,7 @@ const Donors = ({ username, role }) => {
       try {
         // Fetch all donors
         const donorsResponse = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app/'}/donors/api/donors`
+          `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app'}/donors/api/donors`
         );
         console.log("All Donors API Response:", donorsResponse.data);
 
@@ -37,7 +37,7 @@ const Donors = ({ username, role }) => {
         setLoadingLocation(true);
         try {
           const locationResponse = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app/'}/donors/api/user-location`,
+            `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app'}/donors/api/user-location`,
             { params: { username, role } }
           );
 
@@ -57,7 +57,7 @@ const Donors = ({ username, role }) => {
         if (role === 'patient') {
           try {
             const bloodGroupResponse = await axios.get(
-              `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app/'}/donors/api/user-blood-group`,
+              `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network-server.vercel.app'}/donors/api/user-blood-group`,
               { params: { username } }
             );
 

@@ -17,7 +17,7 @@ const DonorForm = ({ username, role }) => {
 
     try {
       // Sending donor details to the backend server
-      const response = await axios.post("https://ai-powered-emergency-health-network-server.vercel.app//donor-form/api/donors", donorData);
+      const response = await axios.post("https://ai-powered-emergency-health-network-server.vercel.app/donor-form/api/donors", donorData);
 
       if (response.data.success) {
         setMessage("Donor details submitted successfully!");
