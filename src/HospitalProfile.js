@@ -18,7 +18,7 @@ const HospitalProfile = ({ username }) => {
   useEffect(() => {
     const fetchHospitalData = async () => {
       try {
-        const response = await axios.get(`https://ai-powered-emergency-health-network-server.vercel.app/hospital-profile/api/hospital/${username}`);
+        const response = await axios.get(`https://ai-powered-emergency-health-network.onrender.com/hospital-profile/api/hospital/${username}`);
         setHospital(response.data);
         setFormData({
           location: response.data.location || '',
@@ -60,7 +60,7 @@ const HospitalProfile = ({ username }) => {
         donation: formData.donation // Including donation in the updated data
       };
 
-      const response = await axios.put(`https://ai-powered-emergency-health-network-server.vercel.app/hospital-profile/api/hospital/${username}`, updatedData);
+      const response = await axios.put(`https://ai-powered-emergency-health-network.onrender.com/hospital-profile/api/hospital/${username}`, updatedData);
       console.log('Updated successfully:', response.data);
       alert('Hospital profile updated successfully!');
       setHospital(response.data);
