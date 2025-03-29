@@ -22,7 +22,7 @@ const Login = ({ onLoginSuccess }) => {
     }
 
     try {
-      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app";
+      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network.onrender.com";
 
       const response = await axios.post(`${apiUrl}/login/login/login`, {
         username,
@@ -57,7 +57,7 @@ const Login = ({ onLoginSuccess }) => {
   // ✅ Test connection function to check frontend-backend communication
   const testConnection = async () => {
     try {
-      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app";
+      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network.onrender.com";
       
       const response = await axios.get(`${apiUrl}/test-connection`);
       alert(response.data.message); // Show success message
