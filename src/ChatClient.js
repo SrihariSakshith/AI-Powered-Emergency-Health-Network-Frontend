@@ -17,7 +17,7 @@ const ChatClient = ({ username, role, onLogout }) => {
     setMessages((prev) => [...prev, userMessage]);
 
     try {
-      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network-server.vercel.app/chat";
+      const apiUrl = process.env.REACT_APP_API_BASE_URL || "https://ai-powered-emergency-health-network.onrender.com/chat";
 
       const response = await axios.post(`${apiUrl}/chat/chat`, {
         message: input,

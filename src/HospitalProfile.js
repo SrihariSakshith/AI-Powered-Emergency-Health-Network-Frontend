@@ -72,7 +72,7 @@ const HospitalProfile = ({ username }) => {
 
   const handleDonationDelete = async () => {
     try {
-      await axios.delete(`https://ai-powered-emergency-health-network-server.vercel.app/hospital-profile/api/hospital/${username}/donation`);
+      await axios.delete(`https://ai-powered-emergency-health-network.onrender.com/hospital-profile/api/hospital/${username}/donation`);
       alert('Donation removed successfully!');
       setHospital({ ...hospital, donation: undefined });
       setFormData({ ...formData, donation: '' }); // Reset donation field
