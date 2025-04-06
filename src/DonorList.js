@@ -11,12 +11,12 @@ const DonorList = () => {
 
   useEffect(() => {
     axios
-      .get('https://ai-powered-emergency-health-network.onrender.com/donorslist/all') // Updated route
+      .get('https://ai-powered-emergency-health-network.onrender.com/donorslist/all')
       .then((response) => {
-        setDonors(response.data.data); // Ensure the response structure matches
+        setDonors(response.data.data);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setError('Error fetching donor data');
         setLoading(false);
       });
@@ -24,7 +24,7 @@ const DonorList = () => {
 
   const deleteDonor = async (username) => {
     try {
-      await axios.delete(`https://ai-powered-emergency-health-network.onrender.com/donorslist/${username}`); // Updated route
+      await axios.delete(`https://ai-powered-emergency-health-network.onrender.com/donorslist/${username}`);
       setDonors(donors.filter((donor) => donor.username !== username));
     } catch (error) {
       console.error('Error deleting donor:', error);
@@ -32,13 +32,8 @@ const DonorList = () => {
     }
   };
 
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleSearchTypeChange = (e) => {
-    setSearchType(e.target.value);
-  };
+  const handleSearch = (e) => setSearchQuery(e.target.value);
+  const handleSearchTypeChange = (e) => setSearchType(e.target.value);
 
   const filteredDonors = donors.filter((donor) =>
     searchType === 'username'
@@ -53,7 +48,7 @@ const DonorList = () => {
 
   return (
     <div className="donors-container">
-      <h1 className="heading">Donors</h1>
+      <h1 className="heading"> Donor Dashboard </h1>
       <div className="search-container">
         <input
           type="text"
@@ -77,13 +72,9 @@ const DonorList = () => {
           filteredDonors.map((donor) => (
             <div className="donor-card" key={donor.username}>
               <h3 className="donor-name">{donor.username}</h3>
-              <p className="donor-donation">Donation: {donor.donation}</p>
-              <p className="donor-email">
-                <strong>Email:</strong> {donor.email}
-              </p>
-              <p className="donor-location">
-                <strong>Location:</strong> {donor.location}
-              </p>
+              <p className="donor-donation"> Donation: {donor.donation}</p>
+              <p className="donor-email">📧 {donor.email}</p>
+              <p className="donor-location">📍 {donor.location}</p>
               <button
                 className="delete-button"
                 onClick={() => deleteDonor(donor.username)}
@@ -93,7 +84,7 @@ const DonorList = () => {
             </div>
           ))
         ) : (
-          <p>No donors found matching your search.</p>
+          <p className="no-results">No donors found matching your search.</p>
         )}
       </div>
     </div>

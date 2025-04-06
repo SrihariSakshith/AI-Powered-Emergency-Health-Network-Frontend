@@ -1,19 +1,21 @@
-/* General reset for the navbar */
+/* Reset */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
+/* Navbar Container */
 .nav-header {
-  background-color: #333;
+  background-color: #1a1a1a;
   color: white;
-  padding: 20px 0;
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Inner Wrapper */
 .nav-bottom {
   display: flex;
   justify-content: center;
@@ -27,16 +29,25 @@
   align-items: center;
   width: 90%;
   max-width: 1200px;
+  padding: 20px 0;
 }
 
+/* Logo */
 .nav-logo {
   font-size: 2em;
   font-weight: bold;
-  color: #ffffff;
+  color: #00ffc8;
   text-decoration: none;
   letter-spacing: 2px;
+  text-shadow: 0 0 10px #00ffc8;
+  transition: transform 0.3s ease;
 }
 
+.nav-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Navigation List */
 .nav-navbar {
   display: flex;
   align-items: center;
@@ -44,69 +55,90 @@
 
 .nav-navbar-list {
   display: flex;
-  list-style-type: none;
-}
-
-.nav-navbar-link {
-  color: #ffffff;
-  text-decoration: none;
-  margin: 0 15px;
-  font-size: 1.1em;
-  transition: color 0.3s ease;
-}
-
-.nav-navbar-link:hover {
-  color: #4CAF50; /* Green color for hover effect */
-}
-
-.nav-user-info {
-  display: flex;
-  align-items: center;
-}
-
-.nav-user {
-  display: flex;
-  align-items: center;
-}
-
-.nav-username {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.nav-role {
-  font-style: italic;
-  margin-right: 20px;
-}
-
-.nav-btn {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-left: 10px;
-}
-
-.nav-btn:hover {
-  background-color: #45a049;
-}
-
-.nav-btn:focus {
-  outline: none;
+  list-style: none;
 }
 
 .nav-navbar-list li {
   display: inline-block;
 }
 
-.navbar-mobile {
-  display: none;
+.nav-navbar-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1em;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
 }
 
+.nav-navbar-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #00ffc8;
+  transition: width 0.3s;
+}
+
+.nav-navbar-link:hover {
+  color: #00ffc8;
+}
+
+.nav-navbar-link:hover::after {
+  width: 100%;
+}
+
+/* Right Side - User Info */
+.nav-user-info {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 15px;
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-username {
+  font-weight: bold;
+  color: #00ffc8;
+  text-shadow: 0 0 8px #00ffc8;
+}
+
+.nav-role {
+  font-style: italic;
+  color: #bbb;
+  font-size: 0.9em;
+}
+
+/* Buttons */
+.nav-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #00ffc8, #0aff9d);
+  border: none;
+  border-radius: 30px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: linear-gradient(135deg, #0aff9d, #00ffc8);
+  transform: scale(1.05);
+}
+
+.nav-btn:focus {
+  outline: none;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -120,6 +152,7 @@
 
   .nav-navbar-list {
     flex-direction: column;
+    gap: 10px;
   }
 
   .nav-navbar-link {
@@ -128,15 +161,6 @@
 
   .nav-user-info {
     margin-top: 20px;
-  }
-
-  .navbar-mobile {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    color: #ffffff;
-    font-size: 2em;
+    justify-content: center;
   }
 }
