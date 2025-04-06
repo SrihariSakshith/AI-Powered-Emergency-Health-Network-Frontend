@@ -18,12 +18,10 @@ const Hospitals = ({ username, role }) => {
         const hospitalsResponse = await axios.get(
           `${process.env.REACT_APP_API_BASE_URL || 'https://ai-powered-emergency-health-network.onrender.com'}/hospitals/all`
         );
-        console.log("All Hospitals API Response:", hospitalsResponse.data); // Check the API response
 
         if (Array.isArray(hospitalsResponse.data)) {
           setHospitals(hospitalsResponse.data);
         } else {
-          console.error("All Hospitals API returned non-array data:", hospitalsResponse.data);
           setError("Error: Invalid hospital data format (all hospitals)");
           return;
         }
@@ -35,19 +33,15 @@ const Hospitals = ({ username, role }) => {
           }
         );
 
-        console.log("Recommended Hospitals API Response:", recommendedResponse.data); // Check the API response
-
         if (Array.isArray(recommendedResponse.data)) {
           setRecommendedHospitals(recommendedResponse.data);
         } else {
-          console.error("Recommended Hospitals API returned non-array data:", recommendedResponse.data);
           setError("Error: Invalid hospital data format (recommended hospitals)");
           return;
         }
 
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching data:', err);
         setError('Error fetching hospital data');
         setLoading(false);
       }
@@ -56,62 +50,49 @@ const Hospitals = ({ username, role }) => {
     fetchHospitals();
   }, [role, username]);
 
-  const handleSearchHospitals = (e) => {
-    setSearchQueryHospitals(e.target.value);
-  };
-
-  const handleFieldChangeHospitals = (e) => {
-    setSearchFieldHospitals(e.target.value);
-  };
-
-  const handleSearchRecommended = (e) => {
-    setSearchQueryRecommended(e.target.value);
-  };
-
-  const handleFieldChangeRecommended = (e) => {
-    setSearchFieldRecommended(e.target.value);
-  };
+  const handleSearchHospitals = (e) => setSearchQueryHospitals(e.target.value);
+  const handleFieldChangeHospitals = (e) => setSearchFieldHospitals(e.target.value);
+  const handleSearchRecommended = (e) => setSearchQueryRecommended(e.target.value);
+  const handleFieldChangeRecommended = (e) => setSearchFieldRecommended(e.target.value);
 
   const normalizeTestsAvailable = (tests) => {
-    if (typeof tests === 'string') {
-      return tests.split(', ').map((test) => test.trim());
-    }
+    if (typeof tests === 'string') return tests.split(',').map((t) => t.trim());
     return Array.isArray(tests) ? tests : [];
   };
 
-  const filteredHospitals = hospitals.filter((hospital) => {
-    const fieldValue = hospital[searchFieldHospitals] || '';
-    if (Array.isArray(fieldValue)) {
-      return fieldValue.some((value) =>
-        value.toLowerCase().includes(searchQueryHospitals.toLowerCase())
-      );
-    }
-    return fieldValue.toLowerCase().includes(searchQueryHospitals.toLowerCase());
-  });
+  const filterHospitals = (list, field, query) =>
+    list.filter((hospital) => {
+      const fieldValue = hospital[field] || '';
+      if (Array.isArray(fieldValue)) {
+        return fieldValue.some((val) => val.toLowerCase().includes(query.toLowerCase()));
+      }
+      return fieldValue.toLowerCase().includes(query.toLowerCase());
+    });
 
-  const filteredRecommendedHospitals = recommendedHospitals.filter((hospital) => {
-    const fieldValue = hospital[searchFieldRecommended] || '';
-    if (Array.isArray(fieldValue)) {
-      return fieldValue.some((value) =>
-        value.toLowerCase().includes(searchQueryRecommended.toLowerCase())
-      );
-    }
-    return fieldValue.toLowerCase().includes(searchQueryRecommended.toLowerCase());
-  });
+  const filteredHospitals = filterHospitals(hospitals, searchFieldHospitals, searchQueryHospitals);
+  const filteredRecommended = filterHospitals(recommendedHospitals, searchFieldRecommended, searchQueryRecommended);
 
-  if (loading) {
-    return <div className="loading">Loading...</div>;
-  }
+  if (loading) return <div className="loading">Loading...</div>;
+  if (error) return <div className="error">{error}</div>;
 
-  if (error) {
-    return <div className="error">{error}</div>;
-  }
+  const renderHospitalCard = (hospital) => (
+    <div className="hospital-card" key={hospital.username}>
+      <h3 className="hospital-name">{hospital.username}</h3>
+      <p className="hospital-location">Location: {hospital.location || 'Not Available'}</p>
+      <button className="details-btn">Details</button>
+      <div className="hospital-details">
+        <p className="hospital-description"><strong>Description:</strong> {hospital.description}</p>
+        <p className="hospital-tests"><strong>Tests Available:</strong> {normalizeTestsAvailable(hospital.tests_available).join(', ') || 'Not Available'}</p>
+        <p className="hospital-specialties"><strong>Specialties:</strong> {Array.isArray(hospital.specialties) ? hospital.specialties.join(', ') : hospital.specialties || 'Not Available'}</p>
+        <p className="hospital-facilities"><strong>Facilities:</strong> {Array.isArray(hospital.facilities) ? hospital.facilities.join(', ') : hospital.facilities || 'Not Available'}</p>
+      </div>
+    </div>
+  );
 
   return (
     <div className="hospitals-container">
       <h1 className="heading">Hospitals</h1>
 
-      {/* Recommended Hospitals */}
       <div className="search-container-wrapper">
         <h2>Recommended Hospitals</h2>
         <div className="search-container">
@@ -135,48 +116,15 @@ const Hospitals = ({ username, role }) => {
           </select>
         </div>
       </div>
-      <div className="recommended-hospitals">
-        <div className="hospitals-list">
-          {filteredRecommendedHospitals.length > 0 ? (
-            filteredRecommendedHospitals.map((hospital) => (
-              <div className="hospital-card" key={hospital.username}>
-                <h3 className="hospital-name">{hospital.username}</h3>
-                <p className="hospital-location">
-                  Location: {hospital.location || 'Not Available'}
-                </p>
-                <button className="details-btn">Details</button>
-                <div className="hospital-details">
-                  <p className="hospital-description">
-                    <strong>Description:</strong> {hospital.description}
-                  </p>
-                  <p className="hospital-tests">
-                    <strong>Tests Available:</strong>{' '}
-                    {normalizeTestsAvailable(hospital.tests_available).join(', ') || 'Not Available'}
-                  </p>
-                  <p className="hospital-specialties">
-                    <strong>Specialties:</strong>{' '}
-                    {Array.isArray(hospital.specialties)
-                      ? hospital.specialties.join(', ')
-                      : hospital.specialties || 'Not Available'}
-                  </p>
-                  <p className="hospital-facilities">
-                    <strong>Facilities:</strong>{' '}
-                    {Array.isArray(hospital.facilities)
-                      ? hospital.facilities.join(', ')
-                      : hospital.facilities || 'Not Available'}
-                  </p>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>No hospitals found matching your search.</p>
-          )}
-        </div>
+
+      <div className="hospitals-list">
+        {filteredRecommended.length > 0
+          ? filteredRecommended.map(renderHospitalCard)
+          : <p>No recommended hospitals found matching your search.</p>}
       </div>
 
-      {/* All Hospitals */}
       <div className="search-container-wrapper">
-        <h2>Hospitals List</h2>
+        <h2>All Hospitals</h2>
         <div className="search-container">
           <input
             type="text"
@@ -199,41 +147,11 @@ const Hospitals = ({ username, role }) => {
           </select>
         </div>
       </div>
+
       <div className="hospitals-list">
-        {filteredHospitals.length > 0 ? (
-          filteredHospitals.map((hospital) => (
-            <div className="hospital-card" key={hospital.username}>
-              <h3 className="hospital-name">{hospital.username}</h3>
-              <p className="hospital-location">
-                Location: {hospital.location || 'Not Available'}
-              </p>
-              <button className="details-btn">Details</button>
-              <div className="hospital-details">
-                <p className="hospital-description">
-                  <strong>Description:</strong> {hospital.description}
-                </p>
-                <p className="hospital-tests">
-                  <strong>Tests Available:</strong>{' '}
-                  {normalizeTestsAvailable(hospital.tests_available).join(', ') || 'Not Available'}
-                </p>
-                <p className="hospital-specialties">
-                  <strong>Specialties:</strong>{' '}
-                  {Array.isArray(hospital.specialties)
-                    ? hospital.specialties.join(', ')
-                    : hospital.specialties || 'Not Available'}
-                </p>
-                <p className="hospital-facilities">
-                  <strong>Facilities:</strong>{' '}
-                  {Array.isArray(hospital.facilities)
-                    ? hospital.facilities.join(', ')
-                    : hospital.facilities || 'Not Available'}
-                </p>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>No hospitals found matching your search.</p>
-        )}
+        {filteredHospitals.length > 0
+          ? filteredHospitals.map(renderHospitalCard)
+          : <p>No hospitals found matching your search.</p>}
       </div>
     </div>
   );

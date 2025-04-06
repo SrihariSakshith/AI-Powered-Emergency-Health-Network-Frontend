@@ -1,114 +1,130 @@
-/* .donors-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .donors-container .heading {
-    text-align: center;
-    color: #007bff;
-  }
-  
-  .donors-container .search-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .donors-container .search-input {
-    width: 80%;
-    padding: 10px;
-    border-radius: 20px;
-  }
-  
-  .donors-container .donors-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .donors-container .donor-card {
-    width: 300px;
-    padding: 15px;
-    background: #f1f1f1;
-    border-radius: 10px;
-    transition: 0.2s;
-  }
-  
-  .donors-container .donor-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .donors-container .delete-button {
-    background: #dc3545;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-   */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #e1bee7);
+  margin: 0;
+  padding: 0;
+}
 
-   /* Styling for search container, input, and dropdown */
+.donors-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffffc9;
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+  text-align: center;
+  color: #6a1b9a;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
 .search-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
-.search-input {
-  padding: 10px;
-  font-size: 1rem;
-  width: 250px; /* Width of search input */
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  max-width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease;
-}
-
-.search-input:focus {
-  border-color: #4CAF50; /* Green border on focus */
-}
-
+.search-input,
 .search-type-select {
-  padding: 10px;
+  padding: 12px 15px;
   font-size: 1rem;
-  width: 170px; /* Width of dropdown */
+  border-radius: 10px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  max-width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  outline: none;
 }
 
+.search-input:focus,
 .search-type-select:focus {
-  border-color: #4CAF50; /* Green border on focus */
+  border-color: #7b1fa2;
+  box-shadow: 0 0 10px rgba(123, 31, 162, 0.3);
 }
 
-/* Responsive adjustments */
+.donors-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.donor-card {
+  width: 280px;
+  background: linear-gradient(145deg, #f3e5f5, #ede7f6);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 6px 12px rgba(123, 31, 162, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.donor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(123, 31, 162, 0.3);
+}
+
+.donor-name {
+  font-size: 1.4rem;
+  color: #4a148c;
+  margin-bottom: 10px;
+}
+
+.donor-donation,
+.donor-email,
+.donor-location {
+  font-size: 1rem;
+  color: #333;
+  margin: 5px 0;
+}
+
+.delete-button {
+  margin-top: 15px;
+  padding: 10px 16px;
+  background: linear-gradient(to right, #e53935, #d81b60);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.delete-button:hover {
+  background: linear-gradient(to right, #c62828, #ad1457);
+}
+
+.no-results {
+  text-align: center;
+  color: #555;
+  font-style: italic;
+  margin-top: 20px;
+}
+
 @media (max-width: 768px) {
+  .donor-card {
+    width: 90%;
+  }
+
   .search-container {
     flex-direction: column;
-    align-items: center;
   }
 
-  .search-input {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
+  .search-input,
   .search-type-select {
-    width: 100%;
+    width: 90%;
   }
 }
-.donor-location {
-  margin: 5px 0;
-  color: #555;
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6a1b9a;
 }
